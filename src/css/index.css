@@ -9,16 +9,53 @@ html,body {
 	height:100%;
 }
 
+.column{
+	box-sizing: border-box;
+	width: 25%;
+	padding: 10px;
+	position: relative;
+	float: left;
+}
+
+.columnTitle{
+	font-size: 24px;
+	padding: 2px;
+	text-decoration: underline;
+	text-align: center;
+	margin-bottom:20px;
+	font-weight:bold;
+}
+
 .title{
 	font-size:36px;
 	padding:2px;
+	text-align:center;
+	margin-bottom:20px;
+	margin-top:10px;
+	font-weight:bold;
 }
-.subTitle{
-	font-size:24px;
-	padding:2px;
-	padding-left:8px;
-	padding-top:12px;
+
+
+.box{
+	box-sizing: border-box;
+	min-height:50px;
+	border:1px solid black;
+	margin:20px;
+	padding:10px;
 }
+
+.boxTitle{
+	font-size:20px;
+	text-align:center;
+	font-weight:bold;
+}
+
+.boxSubtitle{
+	font-size:16px;
+	text-align:center;
+}
+
+
 .para{
 	font-size:20px;
 	padding:2px;
