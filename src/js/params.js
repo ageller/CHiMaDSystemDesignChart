@@ -30,7 +30,8 @@ function defineParams(){
 					  }
 					}
 
-
+		//will hold the svg element
+		this.svg;
 	};
 
 
