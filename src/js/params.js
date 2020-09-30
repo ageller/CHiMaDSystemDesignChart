@@ -18,7 +18,7 @@ function defineParams(){
 							"color":"#B1D095"
 					  },
 					  "properties": {
-					  		"titles":["Failure Mode", "Toughness", "Strength/Stiffness", "Density","Glass Transition (Tg)", "Degradation Rates", "Delta Coefficient of thermal expansion"],
+					  		"titles":["Failure Mode", "Toughness", "Strength/Stiffness", "Density","Glass Transition (Tg)", "Degradation Rates", "&#916; Coefficient of thermal expansion"],
 					  		"subtitles":["", "", "", "","", "(H2O, O2, salts)", ""],
 					  		"color":"#B8C7E4"
 					  },
@@ -30,8 +30,17 @@ function defineParams(){
 					  }
 					}
 
-		//will hold the svg element
+		
+
+
+
+//will hold the svg element
 		this.svg;
+
+//this will hold the answers
+		this.answers;
+
+
 	};
 
 

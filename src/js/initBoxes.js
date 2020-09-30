@@ -1,3 +1,5 @@
+//this file contains functions that will begin the vis, and produce the "background" w/o the lines
+//
 function populateBoxes(){
 	var columns = Object.keys(params.boxes);
 	var hmax = 0;
@@ -8,6 +10,7 @@ function populateBoxes(){
 			.data(params.boxes[c].titles).enter()
 			.append('div')
 				.attr('class', function(d,j){return 'box '+c+j})
+				.attr('id', function(d,j){return c+d.replace(/\s/g,'').replace(/[^a-zA-Z ]/g, "").toLowerCase();})
 				.style('background-color',function(d){return params.boxes[c].color;})
 
 		dv.append('div')
@@ -23,10 +26,10 @@ function populateBoxes(){
 	})
 
 	//add the extra box behind any elements (this could be automated in the future, through params)
-	var top = 2;
-	var bottom = 3;
-	var elTop = d3.select('#processing').select('.processing'+top).node();
-	var elBottom = d3.select('#processing').select('.processing'+bottom).node();
+	var top = params.boxes.processing.titles[2];
+	var bottom = params.boxes.processing.titles[3];
+	var elTop = d3.select('#processing'+top.replace(/\s/g,'').replace(/[^a-zA-Z ]/g, "").toLowerCase()).node();
+	var elBottom = d3.select('#processing'+bottom.replace(/\s/g,'').replace(/[^a-zA-Z ]/g, "").toLowerCase()).node();
 	//https://stackoverflow.com/questions/6938248/insert-a-div-element-as-parent
 	var parent = elTop.parentNode;
 	var wrapper = document.createElement('div');
@@ -67,11 +70,12 @@ function addArrows(){
 			.attr('stroke', 'black');
 
 	//first arrow
-	var arrow = 0;
-	var bboxTop = d3.select('#processing').select('.processing'+arrow).node().getBoundingClientRect();
+	var arrowTop = params.boxes.processing.titles[0];
+	var arrowBottom = params.boxes.processing.titles[1];
+	var bboxTop = d3.select('#processing'+arrowTop.replace(/\s/g,'').replace(/[^a-zA-Z ]/g, "").toLowerCase()).node().getBoundingClientRect();
+	var bboxBottom = d3.select('#processing'+arrowBottom.replace(/\s/g,'').replace(/[^a-zA-Z ]/g, "").toLowerCase()).node().getBoundingClientRect();
 	var top = bboxTop.y + bboxTop.height;
 	var left = bboxTop.x + bboxTop.width/2.;
-	var bboxBottom = d3.select('#processing').select('.processing'+(arrow+1)).node().getBoundingClientRect();
 	var bottom = bboxBottom.y;
 
 	params.svg.append('path')
@@ -83,15 +87,16 @@ function addArrows(){
 		.attr('fill', 'none');
 
 	//second arrow
-	arrow = 1;
-	bboxTop = d3.select('#processing').select('.processing'+arrow).node().getBoundingClientRect();
-	top = bboxTop.y + bboxTop.height;
-	left = bboxTop.x + bboxTop.width/2.;
+	arrowTop = params.boxes.processing.titles[1];
+	bboxTop = d3.select('#processing'+arrowTop.replace(/\s/g,'').replace(/[^a-zA-Z ]/g, "").toLowerCase()).node().getBoundingClientRect();
 	bboxBottom = d3.select('#processing').select('.wrapperBox').node().getBoundingClientRect();
-	bottom = bboxBottom.y;
+
+	y1 = bboxBottom.y;
+	y2 = bboxTop.y + bboxTop.height;
+	x = bboxTop.x + bboxTop.width/2.;
 
 	params.svg.append('path')
-		.attr('d', d3.line()([[left, bottom], [left, top]]))
+		.attr('d', d3.line()([[x, y1], [x, y2]]))
 		.attr('class','arrow')
 		.attr('stroke', 'black')
 		.attr('stroke-width', 2)
@@ -99,36 +104,13 @@ function addArrows(){
 		.attr('fill', 'none');
 }
 
-function resizer(){
-	//this will take care of the SVG elements (the html elements should move on their own)
-
-	//for now I am just going to remove them and redraw them (could possibly just move them, if this is too slow)
-
-	//remove arrows and add them back
-	d3.selectAll('.arrow').remove();
-	addArrows();
-
-}
 
 
-function init(){
 
-	defineParams();
-
-	//create an svg element that will hold all the lines and arrows (and will sit behind the html divs)
-	params.svg = d3.select('body').append('svg')
-		.style('position', 'absolute')
-		.style('top', 0)
-		.style('left',0)
-		.style('width','100%')
-		.style('height','100%')
-		.style('z-index',-1)
+function initBoxes(){
 
 	populateBoxes();
 
 	addArrows();
 }
 
-init();
-
-window.addEventListener("resize", resizer);

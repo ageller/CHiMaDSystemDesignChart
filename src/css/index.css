@@ -12,7 +12,7 @@ html,body {
 .column{
 	box-sizing: border-box;
 	width: 25%;
-	padding: 10px;
+	padding: 30px;
 	position: relative;
 	float: left;
 }
