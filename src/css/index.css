@@ -9,37 +9,38 @@ html,body {
 	height:100%;
 }
 
+.title{
+	font-size:3vw;
+	padding:2px;
+	text-align:center;
+	margin-bottom:3vh;
+	margin-top:1vh;
+}
+
 .column{
 	box-sizing: border-box;
 	width: 25%;
-	padding: 30px;
+	padding: 2vw;
 	position: relative;
 	float: left;
 }
 
 .columnTitle{
-	font-size: 24px;
+	font-size: 1.7vw;
 	padding: 2px;
 	text-decoration: underline;
 	text-align: center;
-	margin-bottom:20px;
+	margin-bottom:2vh;
 }
 
-.title{
-	font-size:46px;
-	padding:2px;
-	text-align:center;
-	margin-bottom:20px;
-	margin-top:10px;
-}
 
 
 .box{
 	box-sizing: border-box;
-	min-height:50px;
+	min-height:4vh;
 	border:1px solid black;
-	margin:20px;
-	padding:10px;
+	margin:2vw;
+	padding:1vw;
 }
 
 .wrapperBox{
@@ -47,21 +48,21 @@ html,body {
 	background-color: #D7DCE4;
 }
 .boxTitle{
-	font-size:20px;
+	font-size:1.4vw;
 	text-align:center;
 	font-weight:bold;
 }
 
 .boxSubtitle{
-	font-size:16px;
+	font-size:1.1vw;
 	text-align:center;
 }
 
 
 .para{
-	font-size:20px;
+	font-size:1.1vw;
 	padding:2px;
-	padding-left:60px;
+	padding-left:60vw;
 }
 .bordered{
 	border: 1px solid black;
