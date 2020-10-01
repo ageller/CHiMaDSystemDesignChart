@@ -64,13 +64,13 @@ function addArrows(){
 
 	//add the arrows connecting boxes (this could be automated in the future, through params)
 	// Add the arrowhead marker definition to the svg element
-	var arrowSize = window.innerHeight*0.005;
+	var arrowSize = window.innerHeight*0.007;
 	params.svg.append('defs').append('marker')
 		.attr('id', 'arrow')
-		.attr('viewBox', [0, 0, arrowSize, arrowSize])
-		.attr('refX', arrowSize)
+		.attr('viewBox', [0, 0, arrowSize, arrowSize]) 
+		.attr('refX', arrowSize/2.)
 		.attr('refY', arrowSize/2.)
-		.attr('markerWidth', arrowSize)
+		.attr('markerWidth', arrowSize*0.9) //seems like I need to do this or else the side gets cut off (probably because I have a stroke-width of 2, but not sure how else to fix it)
 		.attr('markerHeight', arrowSize)
 		.attr('orient', 'auto-start-reverse')
 		.append('path')
@@ -82,12 +82,12 @@ function addArrows(){
 	var arrowBottom = params.boxes.processing.titles[1];
 	var bboxTop = d3.select('#processing'+arrowTop.replace(/\s/g,'').replace(/[^a-zA-Z ]/g, "").toLowerCase()).node().getBoundingClientRect();
 	var bboxBottom = d3.select('#processing'+arrowBottom.replace(/\s/g,'').replace(/[^a-zA-Z ]/g, "").toLowerCase()).node().getBoundingClientRect();
-	var top = bboxTop.y + bboxTop.height;
-	var left = bboxTop.x + bboxTop.width/2.;
-	var bottom = bboxBottom.y;
+	var y1 = bboxBottom.y;
+	var y2 = bboxTop.y + bboxTop.height + arrowSize;
+	var x = bboxTop.x + bboxTop.width/2.;
 
 	params.svg.append('path')
-		.attr('d', d3.line()([[left, bottom], [left, top]]))
+		.attr('d', d3.line()([[x, y1], [x, y2]]))
 		.attr('class','arrow')
 		.attr('stroke', 'black')
 		.attr('stroke-width', 2)
@@ -100,7 +100,7 @@ function addArrows(){
 	bboxBottom = d3.select('#processing').select('.wrapperBox').node().getBoundingClientRect();
 
 	y1 = bboxBottom.y;
-	y2 = bboxTop.y + bboxTop.height;
+	y2 = bboxTop.y + bboxTop.height  + arrowSize;
 	x = bboxTop.x + bboxTop.width/2.;
 
 	params.svg.append('path')
