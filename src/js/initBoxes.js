@@ -1,5 +1,5 @@
 //this file contains functions that will begin the vis, and produce the "background" w/o the lines
-//
+//this will also create the svg element that holds the lines
 function populateBoxes(){
 	var columns = Object.keys(params.boxes);
 	var hmax = 0;
@@ -47,7 +47,15 @@ function populateBoxes(){
 		dv.style('margin-top',(hmax-h)/2.);
 	})
 
-
+	//create an svg element that will hold all the lines and arrows 
+	params.svg = d3.select('#container').append('svg')
+		.style('position', 'absolute')
+		.style('top', 0)
+		.style('left',0)
+		.style('overflow','hidden')
+		.style('width',d3.select('#container').node().getBoundingClientRect().width - 20) //to allow for the scroll bar
+		.style('height',d3.select('#container').node().getBoundingClientRect().height)
+		//.style('z-index',-1)
 
 }
 

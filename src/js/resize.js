@@ -3,6 +3,11 @@ function resizer(){
 
 	//for now I am just going to remove them and redraw them (could possibly just move them, if this is too slow)
 
+	//resize svg as needed
+	params.svg
+		.style('width',d3.select('#container').node().getBoundingClientRect().width - 20)
+		.style('height',d3.select('#container').node().getBoundingClientRect().height);
+
 	//remove arrows and add them back
 	d3.selectAll('.arrow').remove();
 	addArrows();

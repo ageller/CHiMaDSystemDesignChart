@@ -9,6 +9,12 @@ html,body {
 	height:100%;
 }
 
+#container{
+	display: inline-block;
+	height:auto;
+	position:relative;
+}
+
 .title{
 	font-size:3vw;
 	padding:2px;
