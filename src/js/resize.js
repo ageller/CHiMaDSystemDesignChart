@@ -7,4 +7,8 @@ function resizer(){
 	d3.selectAll('.arrow').remove();
 	addArrows();
 
+	//remove all lines and add them back
+	d3.selectAll('.line').remove();
+	plotAnswers();
+
 }
