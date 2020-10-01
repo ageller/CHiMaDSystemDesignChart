@@ -17,7 +17,7 @@ function loadData() {
 	d3.csv('src/data/answers.csv')
 		.then(function(d) {
 			params.answers = d;
-			plotAnswers();
+			//plotAnswers();
 		})
 		.catch(function(error){
 			console.log('ERROR:', error)
