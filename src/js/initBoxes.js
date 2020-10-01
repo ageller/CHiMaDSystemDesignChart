@@ -64,7 +64,7 @@ function addArrows(){
 
 	//add the arrows connecting boxes (this could be automated in the future, through params)
 	// Add the arrowhead marker definition to the svg element
-	var arrowSize = window.innerHeight*0.007;
+	var arrowSize = Math.max(window.innerWidth, window.innerWidth)*0.004;
 	params.svg.append('defs').append('marker')
 		.attr('id', 'arrow')
 		.attr('viewBox', [0, 0, arrowSize, arrowSize]) 
