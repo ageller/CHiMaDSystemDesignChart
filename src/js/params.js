@@ -18,8 +18,8 @@ function defineParams(){
 							"color":"#B1D095"
 					  },
 					  "properties": {
-					  		"titles":["Failure Mode", "Toughness", "Strength/Stiffness", "Density","Glass Transition (Tg)", "Degradation Rates", "&#916; Coefficient of thermal expansion"],
-					  		"subtitles":["", "", "", "","", "(H2O, O2, salts)", ""],
+					  		"titles":["Failure Mode", "Toughness", "Strength/Stiffness", "Density","Glass Transition (T<sub>g</sub>)", "Degradation Rates", "&#916; Coefficient of thermal expansion"],
+					  		"subtitles":["", "", "", "","", "(H<sub>2</sub>O, O<sub>2</sub>, salts)", ""],
 					  		"color":"#B8C7E4"
 					  },
 					  "performance":{
@@ -41,6 +41,9 @@ function defineParams(){
 		this.answers;
 
 
+//width of the boxes will be defined based on the window size
+		this.boxWidth;
+		this.boxMargin;
 	};
 
 

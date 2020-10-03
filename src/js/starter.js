@@ -2,8 +2,12 @@
 
 defineParams();
 
+// populateBoxes2();
 initBoxes();
 window.addEventListener("resize", resizer);
+
+//trying to correct issue on iOS devices with lines not following boxes
+window.addEventListener("gesturechange", resizer);
 
 
 
