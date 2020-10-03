@@ -14,12 +14,16 @@
 
 //for now I will work with a static csv file
 function loadData() {
-	d3.csv('src/data/answers.csv')
-		.then(function(d) {
-			params.answers = d;
-			plotAnswers();
-		})
-		.catch(function(error){
-			console.log('ERROR:', error)
-		})
+	Promise.all([
+		d3.csv('src/data/answers.csv'),
+		d3.csv('src/data/responses.csv'),
+	]).then(function(d) {
+		params.answers = d[0];
+		params.responses = d[1];
+		plotAnswers();
+		plotResponses();
+	})
+	.catch(function(error){
+		console.log('ERROR:', error)
+	})
 }

@@ -60,7 +60,7 @@ function populateBoxes(){
 			.data(params.boxes[c].titles).enter()
 			.append('div')
 				.attr('class', function(d,j){return 'box '+c+j})
-				.attr('id', function(d,j){return c+d.replace(/\s/g,'').replace(/[^a-zA-Z ]/g, "").toLowerCase();})
+				.attr('id', function(d,j){return c+params.cleanString(d);})
 				.style('background-color',function(d){return params.boxes[c].color;})
 
 		dv.append('div')
@@ -78,8 +78,8 @@ function populateBoxes(){
 	//add the extra box behind any elements (this could be automated in the future, through params)
 	var top = params.boxes.processing.titles[2];
 	var bottom = params.boxes.processing.titles[3];
-	var elTop = d3.select('#processing'+top.replace(/\s/g,'').replace(/[^a-zA-Z ]/g, "").toLowerCase()).node();
-	var elBottom = d3.select('#processing'+bottom.replace(/\s/g,'').replace(/[^a-zA-Z ]/g, "").toLowerCase()).node();
+	var elTop = d3.select('#processing'+params.cleanString(top)).node();
+	var elBottom = d3.select('#processing'+params.cleanString(bottom)).node();
 	//https://stackoverflow.com/questions/6938248/insert-a-div-element-as-parent
 	var parent = elTop.parentNode;
 	var wrapper = document.createElement('div');
@@ -130,8 +130,8 @@ function addArrows(){
 	//first arrow
 	var arrowTop = params.boxes.processing.titles[0];
 	var arrowBottom = params.boxes.processing.titles[1];
-	var bboxTop = d3.select('#processing'+arrowTop.replace(/\s/g,'').replace(/[^a-zA-Z ]/g, "").toLowerCase()).node().getBoundingClientRect();
-	var bboxBottom = d3.select('#processing'+arrowBottom.replace(/\s/g,'').replace(/[^a-zA-Z ]/g, "").toLowerCase()).node().getBoundingClientRect();
+	var bboxTop = d3.select('#processing'+params.cleanString(arrowTop)).node().getBoundingClientRect();
+	var bboxBottom = d3.select('#processing'+params.cleanString(arrowBottom)).node().getBoundingClientRect();
 	var y1 = bboxBottom.y;
 	var y2 = bboxTop.y + bboxTop.height + arrowSize;
 	var x = bboxTop.x + bboxTop.width/2.;
@@ -146,7 +146,7 @@ function addArrows(){
 
 	//second arrow
 	arrowTop = params.boxes.processing.titles[1];
-	bboxTop = d3.select('#processing'+arrowTop.replace(/\s/g,'').replace(/[^a-zA-Z ]/g, "").toLowerCase()).node().getBoundingClientRect();
+	bboxTop = d3.select('#processing'+params.cleanString(arrowTop)).node().getBoundingClientRect();
 	bboxBottom = d3.select('#processing').select('.wrapperBox').node().getBoundingClientRect();
 
 	y1 = bboxBottom.y;

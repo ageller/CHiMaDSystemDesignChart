@@ -44,6 +44,10 @@ function defineParams(){
 //width of the boxes will be defined based on the window size
 		this.boxWidth;
 		this.boxMargin;
+
+		this.cleanString = function(s){
+			return s.replace(/sub\>/g,'').replace(/\s/g,'').replace(/[^a-zA-Z ]/g, "").toLowerCase();
+		}
 	};
 
 
