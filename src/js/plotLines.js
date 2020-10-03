@@ -14,7 +14,7 @@ function plotAnswers(){
 			var vals = params.answers[0][ac].split(",")
 			vals.forEach(function(v){
 				var id2 = col2+params.cleanString(v);
-				drawLine(id1, id2, params.answerWidth, params.answerAlpha, params.answerColor, 'answers');
+				drawLine(id1, id2, params.answerWidth, params.answerAlpha, params.answerColor, 'answers', 100.);
 			})
 		}
 	})
@@ -61,7 +61,7 @@ function plotResponses(){
 						var width = uVals.num[v]/params.responses.length;
 						var w = width*(params.responseMaxWidth - params.responseMinWidth) + params.responseMinWidth;
 						var a = width*(params.responseMaxAlpha - params.responseMinAlpha) + params.responseMinAlpha;
-						drawLine(id1, id2, w, a, params.responseColor, 'responses');
+						drawLine(id1, id2, w, a, params.responseColor, 'responses', width*100.);
 					})
 				}
 			})
@@ -71,7 +71,7 @@ function plotResponses(){
 
 }
 
-function drawLine(id1, id2, width, alpha, color, cls){
+function drawLine(id1, id2, width, alpha, color, cls, pct){
 	var el1 = d3.select('#'+id1);
 	var bbox1 = el1.node().getBoundingClientRect();
 	var x1 = bbox1.x + bbox1.width + window.scrollX;
@@ -96,6 +96,20 @@ function drawLine(id1, id2, width, alpha, color, cls){
 		.attr('stroke-opacity', alpha)
 		.attr('fill', 'none')
 		.style('z-index',2)
-		.style('opacity',op);
+		.style('opacity',op)
+		.on('mouseover',function(e,i){
+			if (cls == 'responses'){
+				d3.select('.tooltip')
+					.style("opacity", 0.9)
+					.html(parseFloat(pct).toFixed(2)+"%")	
+					.style("left", (e.pageX) + "px")		
+					.style("top", (e.pageY - 28) + "px");		
+			}
+		})
+		.on("mouseout", function(d) {		
+			if (cls == 'responses'){
+				d3.select('.tooltip').style("opacity", 0);
+			}
+		});
 }
 

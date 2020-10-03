@@ -8,7 +8,7 @@ function populateBoxes(){
 
 	//create the boxes (using html divs, but I could in principle use d3 rects instead)
 	columns.forEach(function(c, i){
-		var dv = d3.select('#'+c).select('.boxContainer').selectAll('box')
+		var dv = d3.select('#'+c).select('.boxContainer').selectAll('.box')
 			.data(params.boxes[c].titles).enter()
 			.append('div')
 				.attr('class', function(d,j){return 'box '+c+j})
@@ -57,7 +57,27 @@ function populateBoxes(){
 		.style('overflow','hidden')
 		.style('width',d3.select('#container').node().getBoundingClientRect().width - 20) //to allow for the scroll bar
 		.style('height',d3.select('#container').node().getBoundingClientRect().height)
-		.style('z-index',-1)
+		.style('z-index',2)
+		.attr('clip-path', 'url(#myClip)')
+
+	// add a cliping mask so that the lines don't overlap with the boxes
+	var clip = params.svg.append('defs').append('clipPath').attr('id','myClip');
+
+	var bb, bb_prev;
+	columns.forEach(function(c, i){
+		bb = d3.select('#'+c).select('.boxContainer').select('.box').node().getBoundingClientRect();
+		if (i > 0){
+			clip.append('rect')
+				.attr('x',bb_prev.x + bb_prev.width)
+				.attr('y',0)
+				.attr('width',bb.x - (bb_prev.x + bb_prev.width))
+				.attr('height',d3.select('#container').node().getBoundingClientRect().height);
+		}
+		bb_prev = d3.select('#'+c).select('.boxContainer').select('.box').node().getBoundingClientRect();
+
+	})
+
+
 
 }
 
@@ -67,7 +87,7 @@ function addArrows(){
 	//add the arrows connecting boxes (this could be automated in the future, through params)
 	// Add the arrowhead marker definition to the svg element
 	var arrowSize = Math.round(Math.max(Math.max(window.innerWidth, window.innerWidth)*0.004, 3));
-	params.svg.append('defs').append('marker')
+	params.svg.select('defs').append('marker')
 		.attr('id', 'arrow')
 		.attr('viewBox', [0, 0, arrowSize, arrowSize]) 
 		.attr('refX', arrowSize/2.)
@@ -114,29 +134,10 @@ function addArrows(){
 		.attr('fill', 'none');
 }
 
-// in order to get the gray wrapper box to live in front of the lines but behind the colored boxes, I will draw these separately and move them as needed...
-function fillWrappers(){
-
-	d3.selectAll('.wrapperBox').nodes().forEach(function(d,i){
-		var bbox = d.getBoundingClientRect();
-		d3.select('svg').append('rect')
-			.attr('x',bbox.x + window.scrollX)
-			.attr('y',bbox.y + window.scrollY)
-			.attr('width',bbox.width)
-			.attr('height',bbox.height)
-			.attr('fill','#D7DCE4')
-			.attr('class','wrapperBoxFill')
-
-	})
-}
-
-
 function initBoxes(){
 
 	populateBoxes();
 
 	addArrows();
-
-	fillWrappers();
 }
 

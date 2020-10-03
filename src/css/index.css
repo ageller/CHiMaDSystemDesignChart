@@ -38,7 +38,7 @@ html,body {
 	padding: 2vw;
 	position: relative;
 	float: left;
-	z-index:10;
+	/*z-index:10;*/
 }
 
 .columnTitle{
@@ -61,7 +61,7 @@ html,body {
 
 .wrapperBox{
 	border:1px solid black;
-	/*background-color: #D7DCE4;*/
+	background-color: #D7DCE4;
 }
 .boxTitle{
 	font-size:1.4vw;
@@ -109,6 +109,23 @@ html,body {
 	font-style: italic;
 	text-decoration: underline;
 	font-weight:bold;
+}
+
+div.tooltip {	
+	position: absolute;			
+	text-align: center;			
+	height: 16px;
+	line-height:16px;					
+	padding: 2px;				
+	font: 12px sans-serif;		
+	background: lightgray;
+	border: 1px solid gray;
+	border-radius: 8px;			
+	pointer-events: none;
+	opacity:0;
+	-webkit-transition: opacity .4s;
+	transition: opacity 0.4s;
+	z-index:30;
 }
 
 /*for the controls*/
