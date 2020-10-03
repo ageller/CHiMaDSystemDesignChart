@@ -1,3 +1,12 @@
+:root {
+	--processing-color: #F1CCB1;
+	--structure-color: #B1D095;
+	--properties-color: #B8C7E4;
+	--performance-color: #B8A0E9;
+}
+/*Note: these colors are reset in starter.js under the assumption that eventually this all can be read in from a file*/
+
+
 html,body {
 	font: 12px sans-serif;
 	font-family: sans-serif;
@@ -75,6 +84,33 @@ html,body {
 	opacity:0;
 }
 
+.para{
+	margin:20px;
+	font-size:20px;
+	text-align: justify;
+	text-justify: inter-word;
+}
+.processingWord{
+	color: var(--processing-color);
+	font-style: italic;
+	font-weight:bold;
+}
+.structureWord{
+	color: var(--structure-color);
+	font-weight:bold;
+}
+.propertiesWord{
+	color: var(--properties-color);
+	text-decoration: underline;
+	font-weight:bold;
+}
+.performanceWord{
+	color: var(--performance-color);
+	font-style: italic;
+	text-decoration: underline;
+	font-weight:bold;
+}
+
 /*for the controls*/
 #hamburger{
 	position:absolute;
@@ -106,7 +142,7 @@ html,body {
 
 #controls{
 	display:inline-block;
-	padding:1vw;
+	padding:10px;
 	padding-left:40px;
 	line-height:20px;
 	font-size:20px;
