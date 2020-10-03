@@ -49,9 +49,9 @@ function defineParams(){
 		this.responseColor="gray";
 
 //width,opacity and color for answers
-		this.answerWidth = 2;
+		this.answerWidth = 4;
 		this.answerAlpha = 1;
-		this.answerColor = "black";
+		this.answerColor = "#2E7BD0";
 
 //width of the boxes will be defined based on the window size
 		this.boxWidth;
