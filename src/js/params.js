@@ -37,14 +37,29 @@ function defineParams(){
 //will hold the svg element
 		this.svg;
 
-//this will hold the answers
+//this will hold the answers and responses as read in from the files
 		this.answers;
+		this.responses;
 
+//width, opacity, and color for responses
+		this.responseMinWidth = 1;
+		this.responseMaxWidth = 10;
+		this.responseMinAlpha = 0.1;
+		this.responseMaxAlpha = 0.9;
+		this.responseColor="gray";
+
+//width,opacity and color for answers
+		this.answerWidth = 2;
+		this.answerAlpha = 1;
+		this.answerColor = "black";
 
 //width of the boxes will be defined based on the window size
 		this.boxWidth;
 		this.boxMargin;
 
+//for hiding the lines with the toggle switches
+		this.hideLines = {'answers':false, 'responses':false};
+		
 		this.cleanString = function(s){
 			return s.replace(/sub\>/g,'').replace(/\s/g,'').replace(/[^a-zA-Z ]/g, "").toLowerCase();
 		}

@@ -105,7 +105,7 @@ function populateBoxes(){
 		.style('overflow','hidden')
 		.style('width',d3.select('#container').node().getBoundingClientRect().width - 20) //to allow for the scroll bar
 		.style('height',d3.select('#container').node().getBoundingClientRect().height)
-		//.style('z-index',-1)
+		.style('z-index',-1)
 
 }
 
@@ -162,7 +162,21 @@ function addArrows(){
 		.attr('fill', 'none');
 }
 
+// in order to get the gray wrapper box to live in front of the lines but behind the colored boxes, I will draw these separately and move them as needed...
+function fillWrappers(){
 
+	d3.selectAll('.wrapperBox').nodes().forEach(function(d,i){
+		var bbox = d.getBoundingClientRect();
+		d3.select('svg').append('rect')
+			.attr('x',bbox.x)
+			.attr('y',bbox.y)
+			.attr('width',bbox.width)
+			.attr('height',bbox.height)
+			.attr('fill','#D7DCE4')
+			.attr('class','wrapperBoxFill')
+
+	})
+}
 
 
 function initBoxes(){
@@ -170,5 +184,7 @@ function initBoxes(){
 	populateBoxes();
 
 	addArrows();
+
+	fillWrappers();
 }
 

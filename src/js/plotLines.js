@@ -14,38 +14,64 @@ function plotAnswers(){
 			var vals = params.answers[0][ac].split(",")
 			vals.forEach(function(v){
 				var id2 = col2+params.cleanString(v);
-				drawLine(id1, id2, 1.);
+				drawLine(id1, id2, params.answerWidth, params.answerAlpha, params.answerColor, 'answers');
 			})
 		}
 	})
 
 }
 
+//count the uniq elements in an array and return both the counts and the unique array
+function countUniq(arr){
+	out = {'uniq':[], 'num':{}};
+
+	arr.forEach(function(a,i){
+		ac = params.cleanString(a);
+		if (!out.uniq.includes(ac)){
+			out.uniq.push(ac);
+			out.num[ac] = 1;
+		} else {
+			out.num[ac] += 1;
+		}
+	})
+
+	return out;
+}
+
 function plotResponses(){
-	console.log(params.responses)
-	// params.answers.columns.forEach(function(ac,i){
-	// 	if (ac.toLowerCase().includes('link')){
-	// 		//get the box columns
-	// 		var s = ac.split(" ");
-	// 		var col1 = s[1].toLowerCase();
-	// 		var col2 = s[3].toLowerCase();
-	// 		//get the box title and the ids of the elements
-	// 		//left side
-	// 		var p1 = ac.indexOf('[');
-	// 		var p2 = ac.indexOf(']');
-	// 		var id1 = col1+ac.substring(p1+1, p2).replace(/\s/g,'').replace(/[^a-zA-Z ]/g, "").toLowerCase();
-	// 		//right sides
-	// 		var vals = params.answers[0][ac].split(",")
-	// 		vals.forEach(function(v){
-	// 			var id2 = col2+v.replace(/\s/g,'').replace(/[^a-zA-Z ]/g, "").toLowerCase();
-	// 			drawLine(id1, id2);
-	// 		})
-	// 	}
-	// })
+	params.responses.columns.forEach(function(rc,i){
+		if (rc.toLowerCase().includes('link')){
+			//get the box columns
+			var s = rc.split(" ");
+			var col1 = s[1].toLowerCase();
+			var col2 = s[3].toLowerCase();
+			//get the box title and the ids of the elements
+			//left side
+			var p1 = rc.indexOf('[');
+			var p2 = rc.indexOf(']');
+			var id1 = col1+params.cleanString(rc.substring(p1+1, p2));
+			//right sides (want to save this in an array if possible)
+			var vals = []
+			params.responses.forEach(function(r,j){
+				vals = vals.concat(params.responses[j][rc].split(","));
+				if (j == params.responses.length-1){
+					uVals = countUniq(vals);
+					uVals.uniq.forEach(function(v){
+						var id2 = col2+params.cleanString(v);
+						var width = uVals.num[v]/params.responses.length;
+						var w = width*(params.responseMaxWidth - params.responseMinWidth) + params.responseMinWidth;
+						var a = width*(params.responseMaxAlpha - params.responseMinAlpha) + params.responseMinAlpha;
+						drawLine(id1, id2, w, a, params.responseColor, 'responses');
+					})
+				}
+			})
+
+		}
+	})
 
 }
 
-function drawLine(id1, id2, width){
+function drawLine(id1, id2, width, alpha, color, cls){
 	var el1 = d3.select('#'+id1);
 	var bbox1 = el1.node().getBoundingClientRect();
 	var x1 = bbox1.x + bbox1.width;
@@ -56,10 +82,20 @@ function drawLine(id1, id2, width){
 	var x2 = bbox2.x;
 	var y2 = bbox2.y + bbox2.height/2.;
 
+	var op = 1;
+	if (params.hideLines[cls]){
+		op = 0;
+	}
+
 	params.svg.append('path')
 		.attr('d', d3.line()([[x1, y1], [x2, y2]]))
-		.attr('class','line')
-		.attr('stroke', 'black')
+		.attr('class','line '+cls)
+		.attr('stroke', color)
+		.attr('stroke-linecap','round')
 		.attr('stroke-width', width)
-		.attr('fill', 'none');
+		.attr('stroke-opacity', alpha)
+		.attr('fill', 'none')
+		.style('z-index',2)
+		.style('opacity',op);
 }
+
