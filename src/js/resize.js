@@ -1,11 +1,10 @@
 function resizer(){
 	//if (!params.isMobile){
-		
+
 		//this will take care of the SVG elements (the html elements should move on their own)
 
 		//for now I am just going to remove them and redraw them (could possibly just move them, if this is too slow)
 
-		console.log(d3.select('#container').node().getBoundingClientRect())
 		//resize svg as needed
 		params.svg
 			.style('width',d3.select('#container').node().getBoundingClientRect().width - 20)
@@ -16,8 +15,8 @@ function resizer(){
 		d3.selectAll('.wrapperBox').nodes().forEach(function(d,i){
 			var bbox = d.getBoundingClientRect();
 			d3.select('svg').append('rect')
-				.attr('x',bbox.x)
-				.attr('y',bbox.y)
+				.attr('x',bbox.x + window.scrollX)
+				.attr('y',bbox.y + window.scrollY)
 				.attr('width',bbox.width)
 				.attr('height',bbox.height)
 				.attr('fill','#D7DCE4')

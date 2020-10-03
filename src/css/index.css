@@ -15,7 +15,7 @@ html,body {
 	background-color : var(--background-color);
 	overflow: auto;
 	color: var(--foreground-color);
-	height:100%;
+	/*height:100%;*/
 }
 
 #container{

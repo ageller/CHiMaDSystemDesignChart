@@ -74,13 +74,13 @@ function plotResponses(){
 function drawLine(id1, id2, width, alpha, color, cls){
 	var el1 = d3.select('#'+id1);
 	var bbox1 = el1.node().getBoundingClientRect();
-	var x1 = bbox1.x + bbox1.width;
-	var y1 = bbox1.y + bbox1.height/2.;
+	var x1 = bbox1.x + bbox1.width + window.scrollX;
+	var y1 = bbox1.y + bbox1.height/2. + window.scrollY;
 
 	var el2 = d3.select('#'+id2);
 	var bbox2 = el2.node().getBoundingClientRect();
-	var x2 = bbox2.x;
-	var y2 = bbox2.y + bbox2.height/2.;
+	var x2 = bbox2.x + window.scrollX;
+	var y2 = bbox2.y + bbox2.height/2. + window.scrollY;
 
 	var op = 1;
 	if (params.hideLines[cls]){
