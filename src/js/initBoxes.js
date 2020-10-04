@@ -60,27 +60,40 @@ function populateBoxes(){
 		.style('z-index',2)
 		.attr('clip-path', 'url(#myClip)')
 
-	// add a cliping mask so that the lines don't overlap with the boxes
-	var clip = params.svg.append('defs').append('clipPath').attr('id','myClip');
+	params.svg.append('defs').append('clipPath').attr('id','myClip');
 
+	defineSVGclip();
+
+
+}
+
+function defineSVGclip(){
+	// add a clipping mask so that the lines don't overlap with the boxes
+
+	var clip = params.svg.select('#myClip');
 	var bb, bb_prev;
-	columns.forEach(function(c, i){
+	Object.keys(params.boxes).forEach(function(c, i){
 		bb = d3.select('#'+c).select('.boxContainer').select('.box').node().getBoundingClientRect();
-		if (i > 0){
+		if (i == 0){
+			//to allow the arrows
+			clip.append('rect')
+				.attr('x',bb.x + 0.25*bb.width + window.scrollX)
+				.attr('y',0)
+				.attr('width',0.5*bb.width)
+				.attr('height',d3.select('#container').node().getBoundingClientRect().height);
+		} else {
+			var w = bb.x - (bb_prev.x + bb_prev.width);
 			clip.append('rect')
 				.attr('x',bb_prev.x + bb_prev.width + window.scrollX)
 				.attr('y',0)
-				.attr('width',bb.x - (bb_prev.x + bb_prev.width))
+				.attr('width',w)
 				.attr('height',d3.select('#container').node().getBoundingClientRect().height);
 		}
 		bb_prev = d3.select('#'+c).select('.boxContainer').select('.box').node().getBoundingClientRect();
 
 	})
 
-
-
 }
-
 function addArrows(){
 	//these will need to be shifted if the browser is resized
 
