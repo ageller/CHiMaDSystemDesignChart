@@ -68,7 +68,7 @@ function populateBoxes(){
 		bb = d3.select('#'+c).select('.boxContainer').select('.box').node().getBoundingClientRect();
 		if (i > 0){
 			clip.append('rect')
-				.attr('x',bb_prev.x + bb_prev.width)
+				.attr('x',bb_prev.x + bb_prev.width + window.scrollX)
 				.attr('y',0)
 				.attr('width',bb.x - (bb_prev.x + bb_prev.width))
 				.attr('height',d3.select('#container').node().getBoundingClientRect().height);
