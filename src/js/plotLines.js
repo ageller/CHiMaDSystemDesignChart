@@ -98,7 +98,7 @@ function drawLine(id1, id2, width, alpha, color, cls, pct){
 		.style('z-index',2)
 		.style('opacity',op)
 		.on('mouseover',function(e,i){
-			if (cls == 'responses'){
+			if (cls == 'responses' & d3.select(this).style('opacity') > 0){
 				d3.select('.tooltip')
 					.style("opacity", 0.9)
 					.html(parseFloat(pct).toFixed(2)+"%")	
