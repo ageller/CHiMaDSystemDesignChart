@@ -103,12 +103,22 @@ function drawLine(id1, id2, width, alpha, color, cls, pct){
 					.style("opacity", 0.9)
 					.html(parseFloat(pct).toFixed(2)+"%")	
 					.style("left", (e.pageX) + "px")		
-					.style("top", (e.pageY - 28) + "px");		
+					.style("top", (e.pageY - 28) + "px");	
+				d3.select(this)
+					.attr('stroke', 'black')
+					.attr('stroke-opacity', 1)
+
+	
 			}
 		})
 		.on("mouseout", function(d) {		
 			if (cls == 'responses'){
 				d3.select('.tooltip').style("opacity", 0);
+				d3.select(this)
+					.attr('stroke', color)
+					.attr('stroke-opacity', alpha)
+
+
 			}
 		});
 }
