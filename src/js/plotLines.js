@@ -39,6 +39,7 @@ function countUniq(arr){
 }
 
 function plotResponses(){
+	console.log(params.responses)
 	params.responses.columns.forEach(function(rc,i){
 		if (rc.toLowerCase().includes('link')){
 			//get the box columns

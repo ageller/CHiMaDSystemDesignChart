@@ -26,3 +26,5 @@ d3.select('.switch.responses').on('change',toggleLines)
 
 //this will also call the plotter for the lines
 loadData();
+
+loadScript(params.surveyFile);

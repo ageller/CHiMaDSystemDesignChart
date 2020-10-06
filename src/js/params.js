@@ -32,7 +32,13 @@ function defineParams(){
 
 		
 
-
+//the URL of the json getter of the responses sheet
+//in order to get this URL:
+// 1. make the sheet public to the web (File / Publish to Web /)
+// -- good walk through here: https://github.com/bpk68/g-sheets-api#readme
+// 2. from the URL, get the ID (between the /d/ and next / in the URL)
+// 3. input that <SHEET_ID> into the following command : https://spreadsheets.google.com/feeds/cells/<SHEET_ID>/1/public/values?alt=json-in-script
+		this.surveyFile = 'https://spreadsheets.google.com/feeds/cells/1OCUUn9fbSJml-qKmWYJPL0HKq4xZkzX7J6VelCnkl_A/1/public/values?alt=json-in-script&callback=readGoogleSheet'
 
 //will hold the svg element
 		this.svg;
