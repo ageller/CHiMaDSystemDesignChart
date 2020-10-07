@@ -59,10 +59,6 @@ function defineParams(){
 		this.answerAlpha = 1;
 		this.answerColor = "#2E7BD0";
 
-//width of the boxes will be defined based on the window size
-		this.boxWidth;
-		this.boxMargin;
-
 //for hiding the lines with the toggle switches
 		this.hideLines = {'answers':false, 'responses':false};
 
