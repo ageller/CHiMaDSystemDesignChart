@@ -28,6 +28,6 @@ function toggleLines(event){
 	d3.select('#'+cls+'ToggleText').text(cls.charAt(0).toUpperCase() + cls.slice(1) +' ('+txt+')')
 
 	//show/hide the lines
-	d3.selectAll('.line.'+cls).style('opacity',op);
+	d3.selectAll('.line.'+cls).transition().duration(400).style('opacity',op);
 
 }

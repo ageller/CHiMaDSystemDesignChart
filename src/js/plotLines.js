@@ -39,7 +39,6 @@ function countUniq(arr){
 }
 
 function plotResponses(){
-	console.log(params.responses)
 	params.responses.columns.forEach(function(rc,i){
 		if (rc.toLowerCase().includes('link')){
 			//get the box columns
@@ -105,7 +104,7 @@ function drawLine(id1, id2, width, alpha, color, cls, pct){
 					.html(parseFloat(pct).toFixed(2)+"%")	
 					.style("left", (e.pageX) + "px")		
 					.style("top", (e.pageY - 28) + "px");	
-				d3.select(this)
+				d3.select(this).transition().duration(400)
 					.attr('stroke', 'black')
 					.attr('stroke-opacity', 1)
 
@@ -115,7 +114,7 @@ function drawLine(id1, id2, width, alpha, color, cls, pct){
 		.on("mouseout", function(d) {		
 			if (cls == 'responses'){
 				d3.select('.tooltip').style("opacity", 0);
-				d3.select(this)
+				d3.select(this).transition().duration(400)
 					.attr('stroke', color)
 					.attr('stroke-opacity', alpha)
 

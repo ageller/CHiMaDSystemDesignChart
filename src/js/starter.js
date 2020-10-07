@@ -24,7 +24,9 @@ d3.select('#controls').style('transform', 'translateX('+(-d3.select('#controls')
 d3.select('.switch.answers').on('change',toggleLines)
 d3.select('.switch.responses').on('change',toggleLines)
 
-//this will also call the plotter for the lines
-loadData();
+//these functions will both call the line plotter
+//this will load the answers
+loadAnswers();
 
-loadScript(params.surveyFile);
+//this will load the responses
+loadResponses(params.surveyFile);

@@ -11,8 +11,9 @@
 // 	xmlhttp.send();
 // }
 
+//this function can be used to load any external script
 //I will use this to load the google sheet
-function loadScript(url){
+function loadResponses(url){
 
 	//in case it's already there, remove it (not tested yet)
 	var sheet = document.getElementById('GoogleSheet')
@@ -66,14 +67,15 @@ function readGoogleSheet(json) {
 		}
 	}
 	out.columns = keys; //I think I can do this (if not I need to make out an object to begin with)
-	//console.log(out)
 
 	params.responses = out;
+	console.log(params.responses)
+
 	plotResponses();
 }
 
 //for now I will work with a static csv file
-function loadData() {
+function loadAnswers() {
 	Promise.all([
 		d3.csv('src/data/answers.csv'),
 		//d3.csv('src/data/responses.csv'),

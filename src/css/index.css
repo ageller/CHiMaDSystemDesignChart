@@ -76,12 +76,6 @@ html,body {
 
 .line{
 	mix-blend-mode: multiply;
-	-webkit-transition: opacity .4s;
-	transition: opacity .4s;
-	-webkit-transition: stroke .4s;
-	transition: stroke .4s;
-	-webkit-transition: stroke-opacity .4s;
-	transition: stroke-opacity .4s;
 }
 
 .hidden{
