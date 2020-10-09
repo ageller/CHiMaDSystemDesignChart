@@ -42,36 +42,40 @@ function loadResponses(url){
 
 //parse this json from the Google Sheet into the format that we need
 function readGoogleSheet(json) {
-	var data = json.feed.entry;
-	var keys = [];
-	var out = [];
-	var row = null;
-	for(var r=0; r<data.length; r++) {
-		var cell = data[r]["gs$cell"];
-		var val = cell["$t"];
-		if (cell.col == 1) {
-			j = 0;
-			row = {};
-		}
+	if (json.hasOwnProperty('feed')){
+		if (json.feed.hasOwnProperty('entry')){
+			var data = json.feed.entry;
+			var keys = [];
+			var out = [];
+			var row = null;
+			data.forEach(function(d,r){
+				var cell = d["gs$cell"];
+				var val = cell["$t"];
+				if (cell.col == 1) {
+					j = 0;
+					row = {};
+				}
 
-		if (cell.row == 1){
-			keys.push(val)
-		} else {
-			row[keys[j]] = val;
-		}
+				if (cell.row == 1){
+					keys.push(val)
+				} else {
+					row[keys[j]] = val;
+				}
 
-		j += 1;
+				j += 1;
 
-		if (j == keys.length & cell.row > 1){
-			out.push(row);
+				if (j == keys.length & cell.row > 1){
+					out.push(row);
+				}
+			})
+			out.columns = keys; //I think I can do this (if not I need to make out an object to begin with)
+
+			params.responses = out;
+			console.log(params.responses)
+
+			plotResponses();
 		}
 	}
-	out.columns = keys; //I think I can do this (if not I need to make out an object to begin with)
-
-	params.responses = out;
-	console.log(params.responses)
-
-	plotResponses();
 }
 
 //for now I will work with a static csv file
