@@ -55,8 +55,8 @@ function populateBoxes(){
 		.style('top', 0)
 		.style('left',0)
 		.style('overflow','hidden')
-		.style('width',d3.select('#container').node().getBoundingClientRect().width - 20) //to allow for the scroll bar
-		.style('height',d3.select('#container').node().getBoundingClientRect().height)
+		.style('width',d3.select('#container').node().getBoundingClientRect().width - 20 + 'px') //to allow for the scroll bar
+		.style('height',d3.select('#container').node().getBoundingClientRect().height + 'px')
 		.style('z-index',2)
 		.attr('clip-path', 'url(#myClip)')
 
