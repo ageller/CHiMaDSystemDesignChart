@@ -13,8 +13,10 @@ function plotAnswers(){
 			//right sides
 			var vals = params.answers[0][ac].split(",")
 			vals.forEach(function(v){
-				var id2 = col2+params.cleanString(v);
-				drawLine(id1, id2, params.answerWidth, params.answerAlpha, params.answerColor, 'answers', 100.);
+				if (params.cleanString(v) != ""){
+					var id2 = col2+params.cleanString(v);
+					drawLine(id1, id2, params.answerWidth, params.answerAlpha, params.answerColor, 'answers', 100.);
+				}
 			})
 		}
 	})
@@ -57,11 +59,13 @@ function plotResponses(){
 				if (j == params.responses.length-1){
 					uVals = countUniq(vals);
 					uVals.uniq.forEach(function(v){
-						var id2 = col2+params.cleanString(v);
-						var width = uVals.num[v]/params.responses.length;
-						var w = width*(params.responseMaxWidth - params.responseMinWidth) + params.responseMinWidth;
-						var a = width*(params.responseMaxAlpha - params.responseMinAlpha) + params.responseMinAlpha;
-						drawLine(id1, id2, w, a, params.responseColor, 'responses', width*100.);
+						if (params.cleanString(v) != ""){
+							var id2 = col2+params.cleanString(v);
+							var width = uVals.num[v]/params.responses.length;
+							var w = width*(params.responseMaxWidth - params.responseMinWidth) + params.responseMinWidth;
+							var a = width*(params.responseMaxAlpha - params.responseMinAlpha) + params.responseMinAlpha;
+							drawLine(id1, id2, w, a, params.responseColor, 'responses', width*100.);
+						}
 					})
 				}
 			})
